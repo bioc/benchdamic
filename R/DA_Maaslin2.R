@@ -146,11 +146,12 @@ DA_Maaslin2 <- function(object, assay_name = "counts",
     results <- as.data.frame(res[["results"]])
     statInfo <- results[results[, "metadata"] == contrast[1] &
         results[, "value"] == contrast[2], ]
-    ord <- match(rownames(counts), statInfo[, "feature"])
+    ord <- match(make.names(rownames(counts)), statInfo[, "feature"])
     statInfo <- statInfo[ord, ]
     pValMat <- statInfo[, c("pval", "qval")] 
     colnames(pValMat) <- c("rawP", "adjP")
-    rownames(statInfo) <- rownames(pValMat) <- rownames(counts)
+    rownames(statInfo) <- statInfo[, "feature"] <- rownames(pValMat) <- 
+        rownames(counts)
     return(list("pValMat" = pValMat, "statInfo" = statInfo, "name" = name))
 }# END - function: DA_Maaslin2
 
