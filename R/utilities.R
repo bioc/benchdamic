@@ -325,15 +325,18 @@ getDA <- function(method, slot = "pValMat", colName = "rawP", type = "pvalue",
         if (type == "pvalue") { # p-value <= threshold_pvalue are DA
             msg <- paste0(msg, ", ", colName, "<=", threshold_pvalue, "\n")
             index_DA <- which(out[, "stat"] <= threshold_pvalue)
+            DA_taxa <- rownames(out)[index_DA]
+            out_DA <- out[DA_taxa, ]
+            ordered_out <- out_DA[order(out_DA[, "stat"]), ]
         } else if (type == "logfc") { # -|lfc| <= -threshold_logfc are DA
             msg <- paste0(msg, ", |", colName, "|>=", threshold_logfc)
             index_DA <- which(out[, "stat"] <= -threshold_logfc, "\n")
+            DA_taxa <- rownames(out)[index_DA]
+            out_DA <- out[DA_taxa, ]
+            ordered_out <- out_DA[order(-abs(out_DA[, "stat"])), ]
         } else {
             stop("type should be one between 'pvalue' or 'logfc'")
         }
-        DA_taxa <- rownames(out)[index_DA]
-        out_DA <- out[DA_taxa, ]
-        ordered_out <- out_DA[order(out_DA[, "stat"]), ]
         DA_taxa <- rownames(ordered_out)[seq_len(min(length(DA_taxa), top))]
         if (length(index_DA) != 0) { # Check if all non-DA
             out[DA_taxa, "DA"] <- "DA"
@@ -350,15 +353,18 @@ getDA <- function(method, slot = "pValMat", colName = "rawP", type = "pvalue",
                 which(out[, "stat"] <= threshold_pvalue),
                 which(abs(out[, "direction"]) >= threshold_logfc)
             )
+            DA_taxa <- rownames(out)[index_DA]
+            out_DA <- out[DA_taxa, ]
+            ordered_out <- out_DA[order(out_DA[, "stat"]), ]
         } else if (type == "logfc") { # If the first column is a -|lfc|
             msg <- paste0(msg, ", |", colName, "|>=", threshold_logfc, "\n")
             index_DA <- which(out[, "stat"] <= -threshold_logfc)
+            DA_taxa <- rownames(out)[index_DA]
+            out_DA <- out[DA_taxa, ]
+            ordered_out <- out_DA[order(-abs(out_DA[, "stat"])), ]
         } else {
             stop("type should be one between 'pvalue' or 'logfc'")
         }
-        DA_taxa <- rownames(out)[index_DA]
-        out_DA <- out[DA_taxa, ]
-        ordered_out <- out_DA[order(-abs(out_DA[, "direction"])), ]
         DA_taxa <- rownames(ordered_out)[seq_len(min(length(DA_taxa), top))]
         if (length(index_DA) != 0) { # Check if all non-DA
             out[DA_taxa, "DA"] <- ifelse(test = sign(out[DA_taxa, "direction"])
