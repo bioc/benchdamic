@@ -1,3 +1,44 @@
+Changes in Version 1.12.1 (2024-11-20)
+=====================================
+
+* Porting the changes of devel version 1.13.1 to release
+
+Changes in Version 1.13.1 (2024-11-20)
+=====================================
+
+* Bug-fix: changed an internal parameter of DA_ANCOM() to make it works after the new release
+
+Changes in Version 1.13.0 (2024-10-29)
+=====================================
+
+* Bump x.y.z version to odd y following creation of RELEASE_3_20 branch
+
+Changes in Version 1.12.0 (2024-10-29)
+=====================================
+
+* Published in Bioconductor release 3.20
+
+Changes in Version 1.10.1 (2024-09-23)
+=====================================
+
+* Porting the changes of devel version 1.11.1 to release
+
+Changes in Version 1.11.1 (2024-09-23)
+=====================================
+
+* Bug-fix: getDA() function now correctly orders results
+* Modify Maaslin2 feature names to match the original names
+
+Changes in Version 1.11.0 (2024-04-30)
+=====================================
+
+* Bump x.y.z version to odd y following creation of RELEASE_3_19 branch
+
+Changes in Version 1.10.0 (2024-04-30)
+=====================================
+
+* Published in Bioconductor release 3.19
+
 Changes in Version 1.9.4 (2024-03-07)
 =====================================
 
